@@ -3,6 +3,8 @@ You collect a bunch of pictures of the same event from different cameras and all
 This tiny library provides a chronological reorder of a saved image files. It uses the EXIF-data (creation tag) for reorder.
 
 ## Usage
+
+### As library
 ```java
 // Simple usage
 CPS.sort(new File("/path/to/images")); 
@@ -10,6 +12,10 @@ CPS.sort(new File("/path/to/images"));
 // Advanced mode
 CPS.sort(List<File> directories, boolean inlineRename, boolean prefixRename, CPSProgress listener)
 ```
+
+### As commandline tool
+`java -jar bin/chronologicalpicturesort.jar /path/to/images/`
+
 
 ## Build
 `mvn clean compile assembly:single`
