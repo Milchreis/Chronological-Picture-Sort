@@ -33,6 +33,19 @@ public class CPS {
 	 * This method sorts the found images in the given directories by the including EXIF
 	 * creation data and renames the files to achieve a chronological order by file name.
 	 * 
+	 * @param directory		expects the directory with the image files
+	 * @throws Exception
+	 */
+	public static void sort(File directory) throws Exception {
+		List<File> directories = new ArrayList<>();
+		directories.add(directory);
+		sort(directories, true, true, null);
+	}
+
+	/**
+	 * This method sorts the found images in the given directories by the including EXIF
+	 * creation data and renames the files to achieve a chronological order by file name.
+	 * 
 	 * @param directories	expects a list of directories
 	 * @throws Exception
 	 */
