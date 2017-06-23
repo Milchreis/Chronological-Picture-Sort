@@ -88,7 +88,12 @@ public class CPS {
 					listener.onSortStep(f1, f2);
 				}
 				try {
-					return getCreationDate(f1).compareTo(getCreationDate(f2));
+					int value = getCreationDate(f1).compareTo(getCreationDate(f2));
+					if(value == 0) {
+						return f1.getName().compareTo(f2.getName());
+					} else {
+						return value;
+					}
 				} catch(Exception e) {
 					return 0;
 				}
