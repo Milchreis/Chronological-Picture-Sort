@@ -36,7 +36,7 @@
 					<configuration>
 						<archive>
 							<manifest>
-								<mainClass>de.milchreis.cps.Main</mainClass>
+								<mainClass>de.milchreis.Main</mainClass>
 							</manifest>
 						</archive>
 						<descriptorRefs>
