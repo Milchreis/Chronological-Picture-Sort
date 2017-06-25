@@ -28,7 +28,13 @@ import com.drew.metadata.exif.ExifSubIFDDirectory;
  *
  */
 public class CPS {
-
+	
+	public static final String[] RAW_FORMATS = {
+			"3fr", "ari", "ARW", "bay", "cap", "CR2", "crw", "dcr", "dcs", "dng", "drf", 
+			"eip", "erf", "fff", "iiq", "k25", "kdc", "mdc", "mef", "mos", "mrw", "NEF", 
+			"nrw", "orf", "pef", "ptx", "pxn", "R3D", "raf", "raw", "rw2", "rwl", "rwz", 
+			"sr2", "srf", "srw", "x3f"};
+			
 	/**
 	 * This method sorts the found images in the given directories by the including EXIF
 	 * creation data and renames the files to achieve a chronological order by file name.
@@ -102,31 +108,65 @@ public class CPS {
 		
 		// Rename files
 		int max = files.size();
-		int leadingZeros = String.valueOf(max).length();
-		String pattern = "%0" + leadingZeros + "d";
 		int number = 1;
 		
 		for(File f : files) {
-			String filename = f.getName();
+
+			File dest = getNewFileName(f, prefixRename, number, max);
+			File rawSrc = fetchRawFile(f);
+			File rawDest = null;
 			
-			if(prefixRename) {
-				filename = pattern + "_" + filename;
-			} else {
-				filename = pattern + "." + FilenameUtils.getExtension(f.getName());
+			if(rawSrc != null && rawSrc.exists()) {
+				rawDest = getNewFileName(rawSrc, prefixRename, number, max);
 			}
 			
-			File dest = new File(f.getParentFile(), String.format(filename, number));
-
 			if(inlineRename) {
 				f.renameTo(dest);
+				
+				if(rawDest != null) {
+					rawSrc.renameTo(rawDest);
+				}
+
 			} else {
 				FileUtils.copyFile(f, dest);
+
+				if(rawDest != null) {
+					FileUtils.copyFile(rawSrc, rawDest);
+				}
 			}
 			
 			number++;
 		}
 	}
 	
+	private static File getNewFileName(File f, boolean prefixRename, int number, int maxFiles) {
+		String filename = f.getName();
+		int leadingZeros = String.valueOf(maxFiles).length();
+		String pattern = "%0" + leadingZeros + "d";
+		
+		if(prefixRename) {
+			filename = pattern + "_" + filename;
+		} else {
+			filename = pattern + "." + FilenameUtils.getExtension(f.getName());
+		}
+		
+		return new File(f.getParentFile(), String.format(filename, number));
+	}
+
+	private static File fetchRawFile(File f) {
+		
+		String filename = FilenameUtils.getBaseName(f.getName());
+		
+		for(String ext : RAW_FORMATS) {
+			File rawFile = new File(f.getParentFile(), filename + "." + ext);
+			if(rawFile.exists()) {
+				return rawFile;
+			}
+		}
+		
+		return null;
+	}
+
 	private static Date getCreationDate(File file) throws IOException, ImageProcessingException {
 		Metadata metadata = ImageMetadataReader.readMetadata(file);
 		ExifSubIFDDirectory directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
