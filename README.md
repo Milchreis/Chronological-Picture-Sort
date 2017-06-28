@@ -14,13 +14,13 @@ CPS.sort(List<File> directories, boolean inlineRename, boolean prefixRename, CPS
 ```
 
 ### As commandline tool
-`java -jar bin/chronologicalpicturesort.jar /path/to/images/`
+`java -jar bin/ChronicalPictureSort-0.0.1.jar /path/to/images/`
 
 
 ### As desktop tool
 Maybe with double click on .jar file
 or
-`java -jar bin/chronologicalpicturesort.jar`
+`java -jar bin/ChronicalPictureSort-0.0.1.jar`
 
 ![alt screenshot](https://github.com/Milchreis/Chronological-Picture-Sort/raw/master/screenshot.png "Screenshot")
 
