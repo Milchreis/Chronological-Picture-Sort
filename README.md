@@ -1,4 +1,4 @@
-# Chronological-Picture-Sort
+# Chronological Picture Sort
 You collect a bunch of pictures of the same event from different cameras and all pictures are not in the correct order? 
 This tiny library provides a chronological reorder of your saved image files. It uses the EXIF-data (creation tag) for reordering.
 
@@ -15,6 +15,14 @@ CPS.sort(List<File> directories, boolean inlineRename, boolean prefixRename, CPS
 
 ### As commandline tool
 `java -jar bin/chronologicalpicturesort.jar /path/to/images/`
+
+
+### As desktop tool
+Maybe with double click on .jar file
+or
+`java -jar bin/chronologicalpicturesort.jar`
+
+![alt screenshot](https://github.com/Milchreis/Chronological-Picture-Sort/raw/master/screenshot.png "Screenshot")
 
 
 ## Build
