@@ -12,6 +12,10 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		
 		if(args.length == 0) {
+			new SimpleGui();
+			
+		} else if(args.length == 1 && (!new File(args[0]).exists() || args[0].equals("--help"))) {	
+			
 			System.out.println("usage: chronologicalpicturesort.jar /path/to/images/ [/path/to/another/director ...]");
 			System.out.println("");
 			System.out.println("  The Chronological Picture Sort tool reads the exif-data of your image files and ");
