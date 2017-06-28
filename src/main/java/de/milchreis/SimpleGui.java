@@ -3,13 +3,11 @@ package de.milchreis;
 import java.io.File;
 
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import de.milchreis.cps.CPS;
 
-public class SimpleGui extends JFrame {
-	private static final long serialVersionUID = 1L;
+public class SimpleGui {
 
 	public SimpleGui() {
 
@@ -23,7 +21,7 @@ public class SimpleGui extends JFrame {
 			File selected = chooser.getSelectedFile();
 
 			int response = JOptionPane.showConfirmDialog(null,
-					"TWould you really rename the containing files by creationdate (EXIF)?\n"+
+					"Would you really rename the containing files by creation date (EXIF)?\n"+
 					"(" + selected.getAbsolutePath() + ")", 
 					"Confirm",
 					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
